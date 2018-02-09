@@ -15,7 +15,8 @@ pipeline {
         }
         stage('') {
           steps {
-            findFiles(glob: '{project-name}')
+            emailext body: 'check your job...', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Your fucking build job started', to: 'ravirajamail@gmail.com'
+            
           }
         }
       }
