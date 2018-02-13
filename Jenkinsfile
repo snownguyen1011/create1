@@ -4,7 +4,8 @@ pipeline {
   stages {
     stage('SCM-CHECKOUT') { 
           steps {
-            try{ 
+            script {
+            try { 
             echo 'Fetching CICD source code'
                git(url: 'https://github.com/snownguyen1011/CICD.git', branch: 'master', credentialsId: 'ravi', poll: true, changelog: true)
             echo 'Ready to Build'
@@ -12,6 +13,7 @@ pipeline {
             catch(e)
             {
               echo 'SCM - Checkout failed'
+            }
             }
         }
   }
