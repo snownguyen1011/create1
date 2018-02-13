@@ -1,25 +1,21 @@
 pipeline {
   agent any
+  
   stages {
-    stage('SCM-CHECKOUT') {
-      parallel {
-        stage('Start') {
+    stage('SCM-CHECKOUT') { 
           steps {
-            echo 'Build Started .....'
+            try{ 
+            echo 'Fetching CICD source code'
+               git(url: 'https://github.com/snownguyen1011/CICD.git', branch: 'master', credentialsId: 'ravi', poll: true, changelog: true)
+            echo 'Ready to Build'
           }
+            catch(e)
+            {
+              echo 'SCM - Checkout failed'
+            }
         }
-        stage('Git ') {
-          steps {
-            git(url: 'https://github.com/snownguyen1011/CICD.git', branch: 'master', credentialsId: 'ravi', poll: true, changelog: true)
-          }
-        }
-        stage('') {
-          steps {
-            emailext body: 'check your job...', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Your fucking build job started', to: 'ravirajamail@gmail.com'
-            
-          }
-        }
-      }
-    }
   }
 }
+}
+        
+
