@@ -9,15 +9,22 @@ pipeline {
             echo 'Fetching CICD source code'
                git(url: 'https://github.com/snownguyen1011/CICD.git', branch: 'master', credentialsId: 'ravi', poll: true, changelog: true)
             echo 'Ready to Build'
-          }
+                }
             catch(e)
             {
               echo 'SCM - Checkout failed'
             }
-            }
-        }
+                   }
+                }
+                           }
+    
+    
+    stage('Build') {
+    
+    }
+       
+  
   }
-}
 }
         
 
